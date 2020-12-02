@@ -1,4 +1,13 @@
 ## Hi there 👋
+I'm a Software Engineer at @Intuit based in Bangalore, 🇮🇳 India. I'm also a maintainer at @Appwrite. 
+Feel free check out what the [Appwrite](https://appwrite.io/) buzz is all about. 
+
+## ⚡️ A few Quick Facts
+- 📚 I'm currently reading [Clean Code by Robert C. Martin](https://www.oreilly.com/library/view/clean-code-a/9780136083238/) 
+- 🎯 Hit me up for **machine learning** ,**android** ,**software architecture**, or **tech in general**.
+- 📝 I sometimes write articles on [Medium](https://medium.com/@christyjacob4)
+- 📺 I'm currently watching [Mr. Robot](https://www.imdb.com/title/tt4158110/)
+
 
 ## 🚀 Stuff I've worked with 
 
@@ -29,7 +38,6 @@
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40" />
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" alt="Vue" width="40" height="40" />
 </p>
-
 
 
 [![Christy's github stats](https://github-readme-stats.vercel.app/api?username=christyjacob4&count_private=true&show_icons=true&theme=vue)](https://github.com/christyjacob4)
