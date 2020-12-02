@@ -1,5 +1,5 @@
 ## Hi there 👋
-I'm a Software Engineer at @Intuit based in Bangalore, 🇮🇳 India. I'm also a maintainer at @Appwrite. 
+I'm a Software Engineer at **[@Intuit](https://www.intuit.com/)** based in Bangalore, 🇮🇳 India. I'm also a maintainer at **[@Appwrite](https://github.com/appwrite)**. 
 Feel free check out what the [Appwrite](https://appwrite.io/) buzz is all about. 
 
 ## ⚡️ A few Quick Facts
