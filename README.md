@@ -1,5 +1,5 @@
 ## Hi there 👋
-I'm a Software Engineer at **[@Appwrite](https://github.com/appwrite)** based in Bangalore, 🇮🇳 India. Previously, I've worked at **[@Intuit](https://www.intuit.com/)** and **[@Samsung Research](https://research.samsung.com/sri-b)**. Feel free check out what the [Appwrite](https://appwrite.io/) buzz is all about. 
+I'm a Software Engineer at **[@Appwrite](https://github.com/appwrite)** based in Abu Dhabi, 🇦🇪 UAE. Previously, I've worked at **[@Intuit](https://www.intuit.com/)** and **[@Samsung Research](https://research.samsung.com/sri-b)**. Feel free check out what the [Appwrite](https://appwrite.io/) buzz is all about. 
 
 ## ⚡️ A few Quick Facts
 - 📚 I'm currently reading [Clean Code by Robert C. Martin](https://www.oreilly.com/library/view/clean-code-a/9780136083238/) 
