@@ -1,8 +1,8 @@
-# 10 Claude Code Skills Every Software Engineer Should Know
+# 11 Claude Code Skills Every Software Engineer Should Know
 
 Claude Code has evolved from a simple terminal-based coding assistant into a full-fledged agentic platform. With the introduction of **Skills** — self-contained packages of instructions, scripts, and resources that Claude loads dynamically — engineers can now automate entire categories of work that used to eat hours out of every week.
 
-This article walks through the **10 most useful Claude Code skills** for software engineers, covering everything from codebase exploration to security auditing to infrastructure automation. Each section includes what the skill does, how to set it up, and a practical example of it in action.
+This article walks through the **11 most useful Claude Code skills** for software engineers, covering everything from codebase exploration to security auditing to infrastructure automation. Each section includes what the skill does, how to set it up, and a practical example of it in action.
 
 ---
 
@@ -18,6 +18,7 @@ This article walks through the **10 most useful Claude Code skills** for softwar
 8. [Documentation Generation & API Docs](#8-documentation-generation--api-docs)
 9. [DevOps Pipeline Builder](#9-devops-pipeline-builder)
 10. [Dependency Auditing & Code Health](#10-dependency-auditing--code-health)
+11. [Blog Writing & Content Generation (`/write-blog`)](#11-blog-writing--content-generation-write-blog)
 
 ---
 
@@ -1025,9 +1026,197 @@ The dependency scanning skills support multiple ecosystems:
 
 ---
 
+## 11. Blog Writing & Content Generation (`/write-blog`)
+
+**What it does:** A skill that turns Claude into a technical blog writer. Given a topic, it researches the subject, outlines the post, writes draft content with code examples, and iterates based on your feedback — all while maintaining your voice and targeting your audience.
+
+**Why it matters:** Engineers have valuable knowledge to share but rarely have time to write. The gap between "I should blog about this" and a published post is enormous. This skill closes that gap by handling the heavy lifting — research, structure, formatting — while you focus on the ideas.
+
+### Setting It Up
+
+Create the skill at `.claude/skills/write-blog/SKILL.md`:
+
+```yaml
+---
+name: write-blog
+description: >
+  Writes technical blog posts. Handles research, outlining, drafting, and
+  revision. Supports markdown output with code examples, diagrams, and
+  structured sections. Use when user says 'write a blog post', 'draft an
+  article', or invokes /write-blog.
+user-invocable: true
+disable-model-invocation: false
+---
+```
+
+```markdown
+# Blog Writer
+
+When the user invokes `/write-blog <topic>`, follow this workflow:
+
+## Step 1: Research & Scope
+
+- Search the web for recent content, documentation, and discussions on the topic
+- Read any relevant files in the current project that relate to the topic
+- Identify the target audience (beginners, intermediate, advanced)
+- Determine the angle — what makes this post different from what already exists?
+
+## Step 2: Outline
+
+Present a structured outline for approval before writing. Include:
+- **Title** — concise, specific, searchable
+- **Hook** — why should the reader care? (1-2 sentences)
+- **Sections** — 4-8 major sections with bullet points for each
+- **Code examples** — list what examples will be included
+- **Audience** — who is this for?
+- **Estimated length** — word count target
+
+Wait for user approval before proceeding.
+
+## Step 3: Draft
+
+Write the full post following these rules:
+- Lead with the problem, not the solution
+- Use concrete examples over abstract explanations
+- Include runnable code snippets (not pseudocode)
+- Add ASCII diagrams for architecture and workflows
+- Keep paragraphs short (3-4 sentences max)
+- Use section headers that tell a story when read in sequence
+- End with actionable next steps, not a generic conclusion
+
+## Step 4: Revision
+
+After presenting the draft:
+- Ask for specific feedback on tone, depth, and accuracy
+- Offer to expand, condense, or restructure any section
+- Check all code examples for correctness
+- Verify all external links are valid
+
+## Formatting Rules
+
+- Output as GitHub-flavored markdown
+- Use `$ARGUMENTS` as the topic. If no topic provided, ask for one.
+- Include frontmatter (title, date, tags, description) for static site generators
+- Use language-tagged fenced code blocks for all code
+```
+
+### The Workflow
+
+```
+┌───────────────────────────────────────────────────────────┐
+│                    /write-blog <topic>                     │
+└──────────────────────┬────────────────────────────────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │  1. Research     │  ← Web search, codebase scan,
+              │                 │    prior art analysis
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │  2. Outline      │  ← Structured outline with
+              │                 │    sections, examples, audience
+              └────────┬────────┘
+                       │
+                  ┌────┴────┐
+                  ▼         │
+            ┌──────────┐    │
+            │ User     │    │  ← Approve / revise outline
+            │ Approval │────┘
+            └────┬─────┘
+                 │ ✓
+                 ▼
+              ┌─────────────────┐
+              │  3. Draft        │  ← Full post with code examples,
+              │                 │    diagrams, frontmatter
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │  4. Revision     │  ← Tone, accuracy, depth,
+              │                 │    link verification
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │  Output .md     │  ← Ready to publish
+              └─────────────────┘
+```
+
+### Example Usage
+
+```
+> /write-blog How we migrated from REST to GraphQL
+
+Claude: I'll research this topic and create an outline.
+
+**Research findings:**
+- REST-to-GraphQL migration is a popular topic with many angles
+- Most existing posts focus on greenfield GraphQL, not migration
+- Key pain points: N+1 queries, schema design, client migration
+
+**Proposed outline:**
+
+# How We Migrated from REST to GraphQL (Without Breaking Everything)
+
+**Audience:** Backend engineers considering or actively doing a migration
+**Length:** ~2,500 words
+
+1. **Why we migrated** — the REST pain points that pushed us
+2. **The strangler fig pattern** — running REST and GraphQL side-by-side
+3. **Schema design decisions** — mapping REST resources to GraphQL types
+4. **The N+1 trap** — DataLoader and batching strategies
+5. **Client migration** — incremental adoption without a big bang
+6. **What we got wrong** — mistakes and lessons learned
+7. **Results** — before/after metrics (latency, payload size, DX)
+
+Code examples:
+- REST endpoint → equivalent GraphQL resolver
+- DataLoader implementation for batching
+- Schema stitching for gradual migration
+
+Shall I proceed with this outline, or would you like changes?
+```
+
+### Customizing for Your Voice
+
+The skill works best when you add a `references/style-guide.md` that captures your writing voice:
+
+```
+.claude/skills/write-blog/
+├── SKILL.md
+└── references/
+    └── style-guide.md    # Your tone, vocabulary, formatting preferences
+```
+
+Example style guide:
+
+```markdown
+# Writing Style Guide
+
+- Tone: conversational but technical, like explaining to a smart colleague
+- Avoid: "leverage", "utilize", "in order to", "it's worth noting"
+- Prefer: short sentences, active voice, concrete examples
+- Code examples: always runnable, never pseudocode
+- Humor: dry, occasional, never forced
+- Structure: problem → context → solution → results → next steps
+```
+
+Claude loads this reference on demand and adapts its writing to match your voice, so the output reads like *you* wrote it, not an AI.
+
+### Pairing with Other Skills
+
+The blog writing skill composes well with skills already covered:
+- **`/repo-explain`** — Generate a "How Our Codebase Works" post from the walkthrough output
+- **`/code-review`** — Write a "Lessons from Code Review" post based on common findings
+- **API Doc Generator** — Turn API reference docs into a "Getting Started with Our API" tutorial
+
+---
+
 ## Putting It All Together
 
-These 10 skills aren't isolated — they compose naturally. A typical development workflow might look like:
+These 11 skills aren't isolated — they compose naturally. A typical development workflow might look like:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -1059,6 +1248,9 @@ These 10 skills aren't isolated — they compose naturally. A typical developmen
        │
        ▼
   /create-pr                         Branch, format, push, PR
+       │
+       ▼
+  /write-blog                        Write about what you built
 ```
 
 Each skill handles its domain while Claude orchestrates the transitions. The result is a development workflow where the tedious parts are automated and the interesting parts — design decisions, code review judgment calls, architectural choices — remain with you.
